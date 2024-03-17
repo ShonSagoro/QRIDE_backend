@@ -3,7 +3,7 @@ import { BaseResponse } from '../../application/dtos/response/baseResponse';
 import { UserResponse } from '../../application/dtos/response/UserResponse';
 import { GetByUserCase } from '../../application/use_case/GetByUserCase';
 
-export default class GetByEmailController {
+export default class GetUserByEmailController {
     constructor(readonly getByUserCase: GetByUserCase) { }
     
     async execute(req: Request, res: Response): Promise<void> {
