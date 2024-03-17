@@ -46,4 +46,4 @@ async function runMigrationScript(filename: string) {
     }
 }
 
-runMigrationScript('./src/UserManagement/Infraestructure/Migrations/mysq_migrations/user_up.sql');
+runMigrationScript('./src/user_management/infraestructure/migrations/mysq_migrations/user_up.sql');
