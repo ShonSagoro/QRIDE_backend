@@ -8,9 +8,9 @@ export class MongoUserHistoryRepository implements UserHistoryInterface{
     constructor() {
         this.initializeCollection();
     }
-    findAllByUserEmail(email: string): Promise<UserHistory[] | null> {
+    async findAllByUserEmail(email: string): Promise<UserHistory[] | null> {
         try {
-            const result = this.collection.find({ 'user.email': email });
+            const result = await this.collection.find({ 'user.email': email });
             if (result) {
                 return result.toArray();
             }
@@ -19,9 +19,9 @@ export class MongoUserHistoryRepository implements UserHistoryInterface{
             return Promise.resolve(null);
         }
     }
-    findAllByUserUUID(user_uuid: string): Promise<UserHistory[] | null> {
+    async findAllByUserUUID(user_uuid: string): Promise<UserHistory[] | null> {
         try {
-            const result = this.collection.find({ 'user_uuid': user_uuid });
+            const result = await this.collection.find({ 'user_uuid': user_uuid });
             if (result) {
                 return result.toArray();
             }
@@ -30,42 +30,53 @@ export class MongoUserHistoryRepository implements UserHistoryInterface{
             return Promise.resolve(null);
         }
     }
-    findByUUID(uuid: string): Promise<UserHistory | null> {
+    async findByUUID(uuid: string): Promise<UserHistory | null> {
         try {
-            const result = this.collection.findOne({ uuid });
+            const result = await this.collection.findOne({ uuid });
+            console.log(result);
             if (result) {
-                return result;
+                return result;  
             }
             return Promise.resolve(null);
         } catch (error) {
             return Promise.resolve(null);
         }
     }
-    deleteByUserUUID(user_uuid: string): Promise<void> {
+    async deleteByUserUUID(user_uuid: string): Promise<void> {
         try {
-            this.collection.deleteMany({ user_uuid });
+            await this.collection.deleteMany({ user_uuid });
             return Promise.resolve();
         } catch (error) {
             return Promise.resolve();
         }
     }
-    deleteByUUID(uuid: string): Promise<void> {
+    async deleteByUUID(uuid: string): Promise<void> {
         try	{
-            this.collection.deleteOne({ uuid });
+            await this.collection.deleteOne({ uuid });
             return Promise.resolve();
         } catch (error) {
             return Promise.resolve();
         }
     }
-    update(uuid: string, user_history: UserHistory): Promise<UserHistory | null> {
+    async update(uuid: string, user_history: UserHistory): Promise<UserHistory | null> {
+        console.log(uuid);
+        console.log(user_history);
         try {
-            this.collection.updateOne({ uuid }, { $set: user_history });
-            return Promise.resolve(user_history);
+            let userUpdate = await this.findByUUID(uuid); 
+            console.log(userUpdate);
+            if (!userUpdate) {
+                return Promise.resolve(null);
+            }else{
+                userUpdate = user_history;
+                userUpdate.uuid = uuid;
+                await this.collection.updateOne({ uuid }, { $set: userUpdate });
+                return Promise.resolve(user_history);
+            }
         } catch (error) {
             return Promise.resolve(null);
         }
     }
-    create(user_history: UserHistory): Promise<UserHistory | null> {
+    async create(user_history: UserHistory): Promise<UserHistory | null> {
         try	{
             this.collection.insertOne(user_history);
             return Promise.resolve(user_history);

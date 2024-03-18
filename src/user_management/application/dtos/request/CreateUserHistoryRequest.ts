@@ -1,7 +1,6 @@
 import { Coordinate } from "../../../domain/entities/Coordinate";
 
 export class CreateUserHistoryRequest {
-    public uuid: string;
     public origin: Coordinate;
     public destiny: Coordinate;
     public user_uuid: string;

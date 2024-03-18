@@ -1,15 +1,15 @@
-import { Coordinate } from "../../../domain/entities/Coordinate";
+export class UpdateUserRequest {
+    email: string;
+    password: string;
+    name: string;
+    lastName: string;
+    phoneNumber: string;
 
-export class UpdateUserHistoryRequest {
-    public uuid: string;
-    public origin: Coordinate;
-    public destiny: Coordinate;
-    public user_uuid: string;
-
-    constructor(uuid: string, origin: Coordinate, destiny: Coordinate, user_uuid: string) {
-        this.uuid = uuid;
-        this.origin = origin;
-        this.destiny = destiny;
-        this.user_uuid = user_uuid;
+    constructor(email: string, password: string, name: string, lastname: string, phoneNumber: string) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.lastName = lastname;
+        this.phoneNumber = phoneNumber;
     }
 }

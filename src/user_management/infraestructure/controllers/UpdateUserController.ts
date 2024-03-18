@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UpdateUserRequest } from "../../application/dtos/request/UpdateUserRequest";
+import {UpdateUserRequest } from "../../application/dtos/request/UpdateUserRequest";
 import { UserResponse } from "../../application/dtos/response/UserResponse";
 import { BaseResponse } from "../../application/dtos/response/baseResponse";
 import { UpdateUserUseCase } from "../../application/use_case/UpdateUserCase";

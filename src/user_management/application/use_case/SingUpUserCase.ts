@@ -19,7 +19,6 @@ export class SingUpUserCase {
             contact,
             credentials
         )
-        await user.validate();
         return await this.userInterface.sing_up(user);
     }
 }

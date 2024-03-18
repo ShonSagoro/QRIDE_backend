@@ -54,6 +54,7 @@ export class MongoDBUserRepository implements UserInterface {
     async sing_in(email: string, password: string, encryptionService: EncryptService, tokenServices: TokenServices): Promise<User | null> {
         try {
             const result = await this.collection.findOne({ 'credentials.email': email });
+            console.log(result);
             if (result) {
                 let status = new Status(result.token, result.verifiedAt);
                 let contact = new Contact(result.contact.name, result.contact.lastName, result.contact.phoneNumber);
@@ -106,10 +107,18 @@ export class MongoDBUserRepository implements UserInterface {
     }
 
     async sing_up(user: User): Promise<User | null> {
+        let user_origin=user;
         try {
-            await this.collection.insertOne(user);
-            return user;
+            const result = await this.collection.findOne({ 'credentials.email': user.credentials.email });
+            if (result) {
+                return null;
+            }else{
+                const { _id, ...userWithoutId } = user as any;
+                await this.collection.insertOne(userWithoutId);
+                return user_origin;
+            }
         } catch (error) {
+            console.error(error); 
             return null;
         }
     }

@@ -16,11 +16,16 @@ export class SingUpUserController {
         data.password = await this.encryptionService.execute(data.password);
         const singUpUserRequest = new SingUpUserRequest(data.email, data.password, data.name, data.lastName, data.phoneNumber);
         try {
+            console.log(singUpUserRequest);
             const user = await this.singUpUserCase.execute(singUpUserRequest);
+            console.log(user);
             if (user) {
+                console.log("Entre");
                 const verificationUrl = `http://${process.env.URL_SERVER}:${process.env.PORT_SERVER}/users/activate/${user.uuid}`;
                 await this.emailService.sendEmail(user.credentials.email, "VERITY", `por favor verifiquse aqui: ${verificationUrl}`);
+                console.log(user);
                 const userResponse = new UserResponse(user);
+                console.log(userResponse);
                 const baseResponse = new BaseResponse(userResponse, "User successfully created", true);
                 res.status(200).send(baseResponse);
             } else {
@@ -28,6 +33,8 @@ export class SingUpUserController {
                 res.status(500).send(baseResponse);
             }
         } catch (error) {
+            console.log("adios");
+            console.log(error);
             const baseResponse = new BaseResponse(null, "Ha ocurrido un error con tu peticion, inténtelo más tarde.", false);
             res.status(204).send(baseResponse);
         }
