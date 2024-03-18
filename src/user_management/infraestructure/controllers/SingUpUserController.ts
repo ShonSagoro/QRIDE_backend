@@ -2,7 +2,7 @@ import { UserResponse } from './../../application/dtos/response/UserResponse';
 import { EmailService } from '../../domain/services/EmailServices';
 import { SingUpUserRequest } from './../../application/dtos/request/SingUpUserRequest';
 import { Request, Response } from "express";
-import { BaseResponse } from '../../application/dtos/response/baseResponse';
+import { BaseResponse } from '../../application/dtos/response/BaseResponse';
 import { SingUpUserCase } from '../../application/use_case/SingUpUserCase';
 import { EncryptService } from '../../domain/services/EncriptServices';
 

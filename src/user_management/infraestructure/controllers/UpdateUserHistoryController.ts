@@ -1,5 +1,5 @@
 import { UserHistoryResponse } from './../../application/dtos/response/UserHistoryResponse';
-import { BaseResponse } from '../../application/dtos/response/baseResponse';
+import { BaseResponse } from '../../application/dtos/response/BaseResponse';
 import { Coordinate } from '../../domain/entities/Coordinate';
 import { UpdateUserHistoryCase } from '../../application/use_case/UpdateUserHistoryCase';
 import { UpdateUserHistoryRequest } from '../../application/dtos/request/UpdateUserHistoryRequest';
