@@ -13,8 +13,10 @@ export class SingInUserController {
     async execute(req: Request, res: Response) {
         const data = req.body;
         const singInUserRequest = new SingInUserRequest(data.email, data.password);
+        console.log(singInUserRequest);
         try {
             let user = await this.singInUserCase.execute(singInUserRequest, this.encryptionService, this.tokenServices);
+            console.log(user);
             if (user) {
                 const uuid = user.uuid;
                 const token = await this.GenerateToken({ uuid: uuid });

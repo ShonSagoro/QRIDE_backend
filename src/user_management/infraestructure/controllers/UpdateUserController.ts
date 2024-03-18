@@ -3,7 +3,7 @@ import { UpdateUserRequest } from "../../application/dtos/request/UpdateUserRequ
 import { UserResponse } from "../../application/dtos/response/UserResponse";
 import { BaseResponse } from "../../application/dtos/response/baseResponse";
 import { UpdateUserUseCase } from "../../application/use_case/UpdateUserCase";
-import { EncryptService } from "../../Domain/Services/EncriptServices";
+import { EncryptService } from "../../domain/services/EncriptServices";
 
 export class UpdateUserController {
     constructor(readonly updateUserCase: UpdateUserUseCase, readonly encryptionService: EncryptService) { }
@@ -12,7 +12,7 @@ export class UpdateUserController {
         const data = req.body;
         data.password = await this.encryptionService.execute(data.password);
         const { uuid } = req.params;
-        const userUpdateRequest = new UpdateUserRequest(data.username, data.email, data.password, data.lastname, data.phoneNumber);
+        const userUpdateRequest = new UpdateUserRequest(data.email, data.password, data.name, data.lastname, data.phoneNumber);
         try {
             const user = await this.updateUserCase.execute(
                 uuid, userUpdateRequest

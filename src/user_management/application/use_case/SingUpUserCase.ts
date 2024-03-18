@@ -9,7 +9,7 @@ export class SingUpUserCase {
     constructor(readonly userInterface: UserInterface) {}
 
     async execute(singUpUserRequest:SingUpUserRequest): Promise<User | null> {
-       
+        console.log(singUpUserRequest);
         let contact = new Contact(singUpUserRequest.name, singUpUserRequest.lastName, singUpUserRequest.phoneNumber)
         let credentials= new Credentials(singUpUserRequest.email, singUpUserRequest.password)
         let status = new Status("", new Date())

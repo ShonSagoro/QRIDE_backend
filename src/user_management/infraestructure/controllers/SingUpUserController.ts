@@ -14,7 +14,7 @@ export class SingUpUserController {
     async execute(req: Request, res: Response) {
         const data = req.body;
         data.password = await this.encryptionService.execute(data.password);
-        const singUpUserRequest = new SingUpUserRequest(data.name, data.lastName, data.phoneNumber, data.email, data.password);
+        const singUpUserRequest = new SingUpUserRequest(data.email, data.password, data.name, data.lastName, data.phoneNumber);
         try {
             const user = await this.singUpUserCase.execute(singUpUserRequest);
             if (user) {
