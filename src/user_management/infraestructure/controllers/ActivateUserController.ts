@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { BaseResponse } from "../../application/dtos/response/baseResponse";
+import { BaseResponse } from "../../application/dtos/response/BaseResponse";
 import { ActivateUserCase } from "../../application/use_case/ActivateUserCase";
 
 export class ActivateUserController {
