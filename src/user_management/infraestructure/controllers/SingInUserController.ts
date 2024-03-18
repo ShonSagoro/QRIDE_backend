@@ -1,6 +1,6 @@
 import JWTMiddleware from '../../../middleware/JWTMiddleware';
 import { EncryptService } from '../../domain/services/EncriptServices';
-import { BaseResponse } from '../../application/dtos/response/baseResponse';
+import { BaseResponse } from "../../application/dtos/response/BaseResponse";
 import { SingInUserCase } from '../../application/use_case/SingInUserCase';
 import { TokenServices } from '../../domain/services/TokenServices';
 import { SingInUserRequest } from './../../application/dtos/request/SingInUserRequest';

@@ -1,5 +1,5 @@
 import { DeleteUserHistoryCase } from './../../application/use_case/DeleteUserHistoryCase';
-import { BaseResponse } from "../../application/dtos/response/baseResponse";
+import { BaseResponse } from "../../application/dtos/response/BaseResponse";
 
 export class DeleteUserHistoryController{
     constructor(readonly deleteUserHistoryCase: DeleteUserHistoryCase) { }

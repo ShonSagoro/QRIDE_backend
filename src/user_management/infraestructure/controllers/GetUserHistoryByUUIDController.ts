@@ -1,5 +1,5 @@
 import { GetByUUIDUserHistoryCase } from './../../application/use_case/GetByUUIDUserHistoryCase';
-import { BaseResponse } from "../../application/dtos/response/baseResponse";
+import { BaseResponse } from "../../application/dtos/response/BaseResponse";
 import { UserHistoryResponse } from '../../application/dtos/response/UserHistoryResponse';
 
 export class GetUserHistoryByUUIDController{

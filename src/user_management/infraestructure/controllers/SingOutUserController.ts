@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { IncomingHttpHeaders } from 'http';
 
-import { BaseResponse } from '../../application/dtos/response/baseResponse';
+import { BaseResponse } from "../../application/dtos/response/BaseResponse";
 import JWTMiddleware from '../../../middleware/JWTMiddleware';
 import { SingOutUserCase } from '../../application/use_case/SingOutUserCase';
 

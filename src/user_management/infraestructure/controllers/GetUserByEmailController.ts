@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { BaseResponse } from '../../application/dtos/response/baseResponse';
+import { BaseResponse } from "../../application/dtos/response/BaseResponse";
 import { UserResponse } from '../../application/dtos/response/UserResponse';
 import { GetByUserCase } from '../../application/use_case/GetByUserCase';
 

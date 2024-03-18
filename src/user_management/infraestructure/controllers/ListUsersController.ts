@@ -1,6 +1,6 @@
 import { UserResponse } from './../../application/dtos/response/UserResponse';
 import { Request, Response } from "express";
-import { BaseResponse } from "../../application/dtos/response/baseResponse";
+import { BaseResponse } from "../../application/dtos/response/BaseResponse";
 import { ListUsersCase } from '../../application/use_case/ListUsersCase';
 
 export class ListUsersController {
