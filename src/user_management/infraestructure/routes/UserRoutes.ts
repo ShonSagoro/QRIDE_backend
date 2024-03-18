@@ -1,6 +1,6 @@
 import { Express } from "express";
 import JWTMiddleware from "../../../middleware/JWTMiddleware";
-import { activateUserController, deleteUserController, getByUuidController, listUsersController, singInUserController, singOutUserCase, singOutUserController, singUpUserController, updateUserController } from "../dependencies";
+import { activateUserController, deleteUserController, getByUuidController, listUsersController, singInUserController, singOutUserCase, singOutUserController, singUpUserController, updateUserController } from "../Dependencies";
 import dotenv from 'dotenv';
 dotenv.config();
 

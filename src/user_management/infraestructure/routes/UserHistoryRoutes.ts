@@ -2,7 +2,7 @@ import { Express } from "express";
 import JWTMiddleware from "../../../middleware/JWTMiddleware";
 import dotenv from 'dotenv';
 import { create } from "domain";
-import { createUserHistoryController, deleteUserHistoryByUserUUIDController, deleteUserHistoryController, getUserHistoryByUUIDController, listUserHistoryByUUIDUserController, updateUserHistoryController } from "../dependencies";
+import { createUserHistoryController, deleteUserHistoryByUserUUIDController, deleteUserHistoryController, getUserHistoryByUUIDController, listUserHistoryByUUIDUserController, updateUserHistoryController } from "../Dependencies";
 dotenv.config();
 
 const Verifytoken = JWTMiddleware.VerifyTokenTry;
