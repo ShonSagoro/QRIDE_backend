@@ -2,13 +2,11 @@
   "name": "ts_hex",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.ts",
   "scripts": {
     "dev": "tsnd --respawn app.ts",
     "build": "tsc",
     "test": "jest",
-    "migration_sql": "ts-node src/user_management/infraestructure/migrations/mysq_migrations/generateMigrations.ts",
-    "migration_sqlite": "ts-node src/user_management/infraestructure/migrations/sqlite_migrations/generateMigrations.ts",
     "test_email": "ts-node src/user/infraestructure/services/NodemailerEmailService.ts"
   },
   "keywords": [],

@@ -1,13 +1,12 @@
 import { Coordinate } from "../../../domain/entities/Coordinate";
 
-export class UpdateUserHistoryRequest {
+export class CreateUserHistoryRequest {
     public uuid: string;
     public origin: Coordinate;
     public destiny: Coordinate;
     public user_uuid: string;
 
-    constructor(uuid: string, origin: Coordinate, destiny: Coordinate, user_uuid: string) {
-        this.uuid = uuid;
+    constructor(origin: Coordinate, destiny: Coordinate, user_uuid: string) {
         this.origin = origin;
         this.destiny = destiny;
         this.user_uuid = user_uuid;

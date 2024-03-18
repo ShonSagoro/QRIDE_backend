@@ -1,3 +1,4 @@
+import { CreateUserHistoryCase } from './../application/use_case/CreateUserHistoryCase';
 import { UpdateUserController } from './controllers/UpdateUserController';
 import { SingOutUserController } from './controllers/SingOutUserController';
 import { ActivateUserController } from './controllers/ActivateUserController';
@@ -19,9 +20,24 @@ import { SingUpUserController } from './controllers/SingUpUserController';
 import GetUserByUuidController from './controllers/GetUserByUuidController';
 import GetUserByEmailController from './controllers/GetUserByEmailController';
 import { ListUsersController } from './controllers/ListUsersController';
+import { MongoDBUserRepository } from './repositories/MongoUserRepository';
+import { MongoUserHistoryRepository } from './repositories/MongoUserHistoryRepository';
+import { UpdateUserHistoryCase } from '../application/use_case/UpdateUserHistoryCase';
+import { DeleteUserHistoryByUserUUIDCase } from '../application/use_case/DeleteUserHistoryByUserUUIDCase';
+import { DeleteUserHistoryCase } from '../application/use_case/DeleteUserHistoryCase';
+import { GetAllByUserHistoryCase } from '../application/use_case/GetAllByUserHistoryCase';
+import { GetByUUIDUserHistoryCase } from '../application/use_case/GetByUUIDUserHistoryCase';
+import { CreateUserHistoryController } from './controllers/CreateUserHistoryController';
+import { DeleteUserHistoryController } from './controllers/DeleteUserHistoryController';
+import { DeleteUserHistoryByUserUUIDController } from './controllers/DeleteUserHistoryByUserUUIDController';
+import { GetUserHistoryByUUIDController } from './controllers/GetUserHistoryByUUIDController';
+import { ListUserHistoryByEmailController } from './controllers/ListUserHistoryByEmailController';
+import { ListUserHistoryByUUIDUserController } from './controllers/ListUserHistoryByUUIDUserController';
+import { UpdateUserHistoryController } from './controllers/UpdateUserHistoryController';
 
 
-export const databaseRepository = new MysqlUserRepository();
+export const databaseRepository = new MongoDBUserRepository();
+export const databaseRepositoryHistory = new MongoUserHistoryRepository();
 
 export const encriptServices = new ByEncryptServices();
 export const nodemailerEmailService = new NodemailerEmailService();
@@ -45,3 +61,18 @@ export const updateUserController = new UpdateUserController(updateUserUseCase, 
 export const listUsersController = new ListUsersController(listUsersCase);
 export const activateUserController = new ActivateUserController(activateUserCase);
 export const singOutUserController = new SingOutUserController(singOutUserCase);
+
+export const createUserHistoryCase = new CreateUserHistoryCase(databaseRepositoryHistory);
+export const deleteUserHistoryByUserUUIDCase = new DeleteUserHistoryByUserUUIDCase(databaseRepositoryHistory);
+export const deleteUserHistoryCase = new DeleteUserHistoryCase(databaseRepositoryHistory);
+export const getAllByUserHistoryCase = new GetAllByUserHistoryCase(databaseRepositoryHistory);
+export const getByUUIDUserHistoryCase = new GetByUUIDUserHistoryCase(databaseRepositoryHistory);
+export const updateUserHistoryCase = new UpdateUserHistoryCase(databaseRepositoryHistory);
+
+export const createUserHistoryController = new CreateUserHistoryController(createUserHistoryCase);
+export const deleteUserHistoryByUserUUIDController = new DeleteUserHistoryByUserUUIDController(deleteUserHistoryByUserUUIDCase);
+export const deleteUserHistoryController = new DeleteUserHistoryController(deleteUserHistoryCase);
+export const getUserHistoryByUUIDController = new GetUserHistoryByUUIDController(getByUUIDUserHistoryCase);
+export const listUserHistoryByEmailController = new ListUserHistoryByEmailController(getAllByUserHistoryCase);
+export const listUserHistoryByUUIDUserController = new ListUserHistoryByUUIDUserController(getAllByUserHistoryCase);
+export const updateUserHistoryController = new UpdateUserHistoryController(updateUserHistoryCase);

@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import path from 'path';
 import { setupUserRoutes } from './src/user_management/infraestructure/routes/UserRoutes';
+import { setupUserHistoryRoutes } from './src/user_management/infraestructure/routes/UserHistoryRoutes';
 dotenv.config();
 
 const app = express();
@@ -15,6 +16,7 @@ const BASE_URL = process.env.BASE_URL || "/api/v1/";
 app.use(express.static(path.join(__dirname, './public/images')));
 app.use(express.json()); 
 setupUserRoutes(app);
+setupUserHistoryRoutes(app);
 app.use(morgan('dev'))
 
 app.listen(PORT, HOST, () => {

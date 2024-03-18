@@ -1,6 +1,6 @@
-import { Coordinate } from "../../../domain/entities/Coordinate";
+import { Coordinate } from "./Coordinate";
 
-export class UpdateUserHistoryRequest {
+export class UserHistory {
     public uuid: string;
     public origin: Coordinate;
     public destiny: Coordinate;
