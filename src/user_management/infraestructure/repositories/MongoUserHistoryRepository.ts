@@ -50,10 +50,20 @@ export class MongoUserHistoryRepository implements UserHistoryInterface{
         }
     }
     deleteByUUID(uuid: string): Promise<void> {
-        throw new Error("Method not implemented.");
+        try	{
+            this.collection.deleteOne({ uuid });
+            return Promise.resolve();
+        } catch (error) {
+            return Promise.resolve();
+        }
     }
     update(uuid: string, user_history: UserHistory): Promise<UserHistory | null> {
-        throw new Error("Method not implemented.");
+        try {
+            this.collection.updateOne({ uuid }, { $set: user_history });
+            return Promise.resolve(user_history);
+        } catch (error) {
+            return Promise.resolve(null);
+        }
     }
     create(user_history: UserHistory): Promise<UserHistory | null> {
         try	{

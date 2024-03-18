@@ -7,7 +7,7 @@ export class ListUserHistoryByUUIDUserController{
     async execute(req: any, res: any) {
         const uuid = req.params.uuid;
         try {
-            let user_history_list = await this.getAllByUserHistoryCase.executeByUserEmail(uuid);
+            let user_history_list = await this.getAllByUserHistoryCase.executeByUserUUID(uuid);
             if(user_history_list && user_history_list.length > 0){
                 let userHistoryResponseList = user_history_list.map(user_history => new UserHistoryResponse(user_history));
                 let baseResponse = new BaseResponse(userHistoryResponseList, "User history found", true);
