@@ -11,10 +11,20 @@ export class SingInUserController {
     constructor(readonly singInUserCase: SingInUserCase, readonly encryptionService: EncryptService, readonly tokenServices: TokenServices) { }
 
     async execute(req: Request, res: Response) {
+        const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
         const data = req.body;
         const singInUserRequest = new SingInUserRequest(data.email, data.password);
-        console.log(singInUserRequest);
         try {
+            if (!singInUserRequest.email || !singInUserRequest.password) {
+                let baseResponse = new BaseResponse(null, "Email and password is required", false);
+                res.status(400).json(baseResponse);
+                return;
+            }
+            if (!emailRegex.test(singInUserRequest.email)) {
+                let baseResponse = new BaseResponse(null, "Invalid email format", false);
+                res.status(400).json(baseResponse);
+                return;
+            }
             let user = await this.singInUserCase.execute(singInUserRequest, this.encryptionService, this.tokenServices);
             console.log(user);
             if (user) {
@@ -29,7 +39,7 @@ export class SingInUserController {
                 
             } else {
                 const baseResponse = new BaseResponse(null, "User not found", false);
-                res.status(401).send(baseResponse);
+                res.status(404).send(baseResponse);
                 return; 
             }
         } catch (error) {
