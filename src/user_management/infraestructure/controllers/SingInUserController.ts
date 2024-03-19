@@ -7,7 +7,6 @@ import { SingInUserRequest } from './../../application/dtos/request/SingInUserRe
 import { Request, Response } from "express";
 
 export class SingInUserController {
-    GenerateToken = JWTMiddleware.GenerateToken;
     constructor(readonly singInUserCase: SingInUserCase, readonly encryptionService: EncryptService, readonly tokenServices: TokenServices) { }
 
     async execute(req: Request, res: Response) {
@@ -26,10 +25,9 @@ export class SingInUserController {
                 return;
             }
             let user = await this.singInUserCase.execute(singInUserRequest, this.encryptionService, this.tokenServices);
-            console.log(user);
             if (user) {
                 const uuid = user.uuid;
-                const token = await this.GenerateToken({ uuid: uuid });
+                const token = await JWTMiddleware.GenerateToken({ uuid: uuid });
                 const tokens = {
                     jwt_token: token,
                     user_token: user.status.token

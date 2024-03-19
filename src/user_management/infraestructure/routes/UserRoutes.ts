@@ -4,7 +4,7 @@ import { activateUserController, deleteUserController, getByUuidController, list
 import dotenv from 'dotenv';
 dotenv.config();
 
-const Verifytoken = JWTMiddleware.VerifyToken;
+const Verifytoken = JWTMiddleware.VerifyToken
 const MODEL_URL = "users/";
 const BASE_URL = process.env.BASE_URL || "/api/v1/";
 
@@ -15,6 +15,6 @@ export function setupUserRoutes(app: Express) {
     app.put(`${BASE_URL}${MODEL_URL}:uuid`, Verifytoken, updateUserController.execute.bind(updateUserController));
     app.delete(`${BASE_URL}${MODEL_URL}:uuid`, Verifytoken, deleteUserController.execute.bind(deleteUserController));
     app.get(`${BASE_URL}${MODEL_URL}activate/:uuid`, activateUserController.execute.bind(activateUserController));
-    app.get(`${BASE_URL}${MODEL_URL}`, listUsersController.execute.bind(listUsersController));
+    app.get(`${BASE_URL}${MODEL_URL}`, Verifytoken, listUsersController.execute.bind(listUsersController));
     app.get(`${BASE_URL}${MODEL_URL}sing_out/:uuid`, Verifytoken, singOutUserController.execute.bind(singOutUserController));
 }

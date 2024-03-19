@@ -7,12 +7,14 @@ dotenv.config();
 
 class JWTMiddleware {
     private static JWT_SECRET = process.env.JWT_SECRET;
-
-    private blacklist: string[] = [];
+    private static blacklist: string[] = [];
 
     public static async VerifyToken(req: Request, res: Response, next: NextFunction) {
         const headers = req.headers as IncomingHttpHeaders;
         const authHeader = headers['authorization'];
+        console.log(authHeader);
+        console.log(JWTMiddleware.blacklist);
+        console.log(JWTMiddleware.JWT_SECRET);
 
         if (!authHeader) {
             return res.status(401).json({ message: 'Token not provided' });
@@ -23,6 +25,12 @@ class JWTMiddleware {
         if (!JWTMiddleware.JWT_SECRET) {
             return res.status(500).json({ message: 'JWT secret not configured' });
         }
+
+        if (await JWTMiddleware.isTokenRevoked(token)) {
+            console.log('Token is revoked');
+            return res.status(401).json({ message: 'Token is revoked' });
+        }
+
         try {
             jwt.verify(token, JWTMiddleware.JWT_SECRET);
             next();
@@ -44,12 +52,12 @@ class JWTMiddleware {
         return jwt.sign(data, JWTMiddleware.JWT_SECRET, { expiresIn: '2h' });
     }
 
-    async addToBlacklist(token: string): Promise<void> {
-        this.blacklist.push(token);
+    public static async addToBlacklist(token: string): Promise<void> {
+        JWTMiddleware.blacklist.push(token);
     }
 
-    async isTokenRevoked(token: string): Promise<boolean> {
-        return this.blacklist.includes(token);
+    public static async isTokenRevoked(token: string): Promise<boolean> {
+        return JWTMiddleware.blacklist.includes(token);
     }
 }
 

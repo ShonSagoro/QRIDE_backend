@@ -151,7 +151,6 @@ export class MongoDBUserRepository implements UserInterface {
     async list(): Promise<User[] | null> {
         try {
             const result = await this.collection.find().toArray();
-            console.log(result);
 
             return result.map((user: { token: string; verifiedAt: Date; contact: { name: string; lastName: string; phoneNumber: string; }; credentials: { email: string; password: string; }; uuid: string; }) => {
                 let status = new Status(user.token, user.verifiedAt);

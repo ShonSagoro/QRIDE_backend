@@ -5,7 +5,7 @@ import { create } from "domain";
 import { createUserHistoryController, deleteUserHistoryByUserUUIDController, deleteUserHistoryController, getUserHistoryByUUIDController, listUserHistoryByUUIDUserController, updateUserHistoryController } from "../Dependencies";
 dotenv.config();
 
-const Verifytoken = JWTMiddleware.VerifyTokenTry;
+const Verifytoken = JWTMiddleware.VerifyToken
 const MODEL_URL = "history/";
 const BASE_URL = process.env.BASE_URL || "/api/v1/";
 

@@ -20,9 +20,9 @@ export class SingOutUserController {
         const token = authHeader.split(' ')[1];
         console.log(token); 
         try {
-            this.jwtMiddleware.addToBlacklist(token);
+            JWTMiddleware.addToBlacklist(token);
             this.singOutUserCase.execute(uuid);
-            const baseResponse = new BaseResponse("Success", "User successfully SINGOUT", true);
+            const baseResponse = new BaseResponse("Success", "Sesión cerrada correctamente", true);
             res.status(200).send(baseResponse);
         } catch (error) {
             const baseResponse = new BaseResponse("Error", "Ha ocurrido un error durante su petición.", false);

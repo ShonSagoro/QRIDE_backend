@@ -35,7 +35,6 @@ import { ListUserHistoryByEmailController } from './controllers/ListUserHistoryB
 import { ListUserHistoryByUUIDUserController } from './controllers/ListUserHistoryByUUIDUserController';
 import { UpdateUserHistoryController } from './controllers/UpdateUserHistoryController';
 
-
 export const databaseRepository = new MongoDBUserRepository();
 export const databaseRepositoryHistory = new MongoUserHistoryRepository();
 
