@@ -48,7 +48,8 @@ describe('Iniciar sesión', () => {
     });
 });
 
-let url_base_cierre_sesion = '/api/v1/users/sing_out/4b9550b9-e045-43e2-8a8b-e8e11a00392c'
+let uuid_sing_out="4b9550b9-e045-43e2-8a8b-e8e11a00392c"
+let url_base_cierre_sesion = `/api/v1/users/sing_out/${uuid_sing_out}`
 let url_protegida = '/api/v1/users'
 describe('Cerrar sesión', () => {
     it('debe banear el token de autenticación y restringir el acceso a las rutas protegidas', async () => {
@@ -96,4 +97,10 @@ describe('Cerrar sesión', () => {
         expect(responseSecond.status).toBe(401);
         expect(responseSecond.body.message).toBe('Token is revoked');
     });
+});
+let uuid_update="4b9550b9-e045-43e2-8a8b-e8e11a00392c"
+let url_base_actualizar = `/api/v1/users/sing_out/${uuid_update}`
+
+describe('Actualizar perfil', () => {
+
 });
