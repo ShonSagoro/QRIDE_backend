@@ -1,3 +1,13 @@
 # QRIDE_backend
-    // "migration_sql": "ts-node src/user_management/infraestructure/migrations/mysq_migrations/generateMigrations.ts",
-    // "migration_sqlite": "ts-node src/user_management/infraestructure/migrations/sqlite_migrations/generateMigrations.ts",
+
+Backend to Qride Application
+
+<pre>
+ㅤ  ∧＿∧
+　(　･∀･)
+　(　つ┳⊃
+ε (_)へ⌒ヽﾌ
+ (　　(　･ω･)
+ ◎―◎   ⊃  ⊃  --> la guia de instalacion se encuentra en otro readme,
+en otro repo, en otra pagina...
+</pre>
