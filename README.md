@@ -9,5 +9,5 @@ Backend to Qride Application
 ε (_)へ⌒ヽﾌ
  (　　(　･ω･)
  ◎―◎   ⊃  ⊃  --> la guia de instalacion se encuentra en otro readme,
-en otro repo, en otra pagina...
+en otro repo, en otra pagina....
 </pre>
