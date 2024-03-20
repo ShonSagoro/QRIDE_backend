@@ -91,6 +91,9 @@ export class MongoDBUserRepository implements UserInterface {
     async findByEmail(email: string): Promise<User | null> {
         try {
             const result = await this.collection.findOne({ 'credentials.email': email });
+            console.log(result);
+            console.log(email);
+            console.log("ENCONTRADO");
             if (result) {
                 let status = new Status(result.token, result.verifiedAt);
                 let contact = new Contact(result.contact.name, result.contact.lastName, result.contact.phoneNumber);
@@ -132,16 +135,31 @@ export class MongoDBUserRepository implements UserInterface {
     }
 
     async update(uuid:string, user: User): Promise<User | null> {
+        console.log("actualizo");
         try {
+            console.log(user);
+            if (user.credentials.email){
+                console.log(user.credentials.email);
+                let user_exist = await this.findByEmail(user.credentials.email);
+                if (user_exist){
+                    console.log("EXISTE");
+                    return null;
+                }
+            }
+
             user.uuid = uuid;
+            let user_data = await this.findByUUID(uuid);
+            
             const updatedUser = {
-                'contact.name': user.contact.name,
-                'contact.lastname': user.contact.lastname,
-                'contact.number_phone': user.contact.phoneNumber,
-                'credentials.email': user.credentials.email,
-                'credentials.password': user.credentials.password,
+                'contact.name': user.contact.name !== undefined ? user.contact.name : (user_data?.contact?.name || ''),
+                'contact.lastname': user.contact.lastname !== undefined ? user.contact.lastname : (user_data?.contact?.lastname || ''),
+                'contact.number_phone': user.contact.phoneNumber !== undefined ? user.contact.phoneNumber : (user_data?.contact?.phoneNumber || ''),
+                'credentials.email': user.credentials.email !== undefined ? user.credentials.email : (user_data?.credentials?.email || ''),
+                'credentials.password': user.credentials.password !== undefined ? user.credentials.password : (user_data?.credentials?.password || ''),
             };
+
             await this.collection.updateOne({ uuid: uuid }, { $set: updatedUser });
+            console.log("ACTUALIZADO");
             return user;
         } catch (error) {
             return null;
