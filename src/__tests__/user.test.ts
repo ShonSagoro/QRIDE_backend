@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { app } from '../../app';
+import { app } from '../app';
 
 let url_base_inicio_sesion = '/api/v1/users/sing_in'
 describe('Iniciar sesión', () => {

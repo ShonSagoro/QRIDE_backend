@@ -2,8 +2,8 @@ import express from 'express';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import path from 'path';
-import { setupUserRoutes } from './src/user_management/infraestructure/routes/UserRoutes';
-import { setupUserHistoryRoutes } from './src/user_management/infraestructure/routes/UserHistoryRoutes';
+import { setupUserRoutes } from './user_management/infraestructure/routes/UserRoutes';
+import { setupUserHistoryRoutes } from './user_management/infraestructure/routes/UserHistoryRoutes';
 dotenv.config();
 
 const app = express();
