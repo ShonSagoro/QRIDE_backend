@@ -5,6 +5,6 @@ export class DeleteValorationCase {
         
     }
     async delete(uuid:string): Promise<void> {
-        return await this.valorationInterface.delete(uuid);
+        await this.valorationInterface.delete(uuid);
     }
 }
