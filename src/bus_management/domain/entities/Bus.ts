@@ -6,7 +6,7 @@ export class Bus{
     public schedule: string;
     public boardingPrice: number;
    
-    constructor(driver: string, schedule: string, boardingPrice: number, uuidRoutesBus: string) {
+    constructor(driver: string, schedule: string, boardingPrice: number) {
         this.uuid = uuidv4();
         this.driver = driver;
         this.schedule = schedule;
