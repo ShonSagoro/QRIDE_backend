@@ -4,7 +4,7 @@ import { BusInterface } from "../../domain/ports/BusInterface";
 import { UpdateBusRequest } from "../dtos/request/UpdateBusRequest";
 import { BaseResponse } from "../dtos/response/BaseResponse";
 
-export class UpdateBusCase{
+export class UpdateBusUseCase{
     constructor(readonly busInterface: BusInterface) {
         
     }

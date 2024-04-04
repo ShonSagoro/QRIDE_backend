@@ -2,7 +2,7 @@ import { RoutesBus } from "../../domain/entities/RoutesBus";
 import { RoutesBusInterface } from "../../domain/ports/RoutesBusInterface";
 import { BaseResponse } from "../dtos/response/BaseResponse";
 
-export class GetByUUIDRoutesBusCase{
+export class GetByUUIDRoutesBusUseCase{
     constructor(readonly routesBusInterface: RoutesBusInterface) {
         
     }

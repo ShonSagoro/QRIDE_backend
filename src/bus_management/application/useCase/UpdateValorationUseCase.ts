@@ -4,7 +4,7 @@ import { UpdateValorationRequest } from '../dtos/request/UpdateValorationRequest
 import { BaseResponse } from "../dtos/response/BaseResponse";
 import { ValorationResponse } from '../dtos/response/ValorationResponse';
 
-export class UpdateValorationCase{
+export class UpdateValorationUseCase{
     constructor(readonly valorationInterface: ValorationInterface) {
         
     }

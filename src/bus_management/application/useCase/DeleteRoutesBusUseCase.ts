@@ -1,7 +1,7 @@
 import { RoutesBusInterface } from "../../domain/ports/RoutesBusInterface";
 import { BaseResponse } from "../dtos/response/BaseResponse";
 
-export class DeleteRoutesBusCase{
+export class DeleteRoutesBusUseCase{
     constructor(readonly routesBusInterface: RoutesBusInterface) {
         
     }

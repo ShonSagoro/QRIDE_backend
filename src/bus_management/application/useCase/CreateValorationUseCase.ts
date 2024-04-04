@@ -3,7 +3,7 @@ import { ValorationInterface } from './../../domain/ports/ValorationInterface';
 import { CreateValorationRequest } from '../dtos/request/CreateValorationRequest';
 import { BaseResponse } from '../dtos/response/BaseResponse';
 import { ValorationResponse } from '../dtos/response/ValorationResponse';
-export class CreateValorationCase {
+export class CreateValorationUseCase {
     constructor(readonly valorationInterface: ValorationInterface) {
         
     }

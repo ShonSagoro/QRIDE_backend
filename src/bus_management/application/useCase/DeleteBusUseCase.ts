@@ -1,7 +1,7 @@
 import { BusInterface } from "../../domain/ports/BusInterface";
 import { BaseResponse } from "../dtos/response/BaseResponse";
 
-export class DeleteBusCase{
+export class DeleteBusUseCase{
     constructor(readonly busInterface: BusInterface) {
         
     }

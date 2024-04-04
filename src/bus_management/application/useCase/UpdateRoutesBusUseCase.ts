@@ -4,7 +4,7 @@ import { UpdateRoutesBusRequest } from "../dtos/request/UpdateRoutesBusRequest";
 import { BaseResponse } from "../dtos/response/BaseResponse";
 import { RoutesBusResponse } from "../dtos/response/RoutesBusResponse";
 
-export class UpdateRoutesBusCase{
+export class UpdateRoutesBusUseCase{
     constructor(readonly routesBusInterface: RoutesBusInterface) {
         
     }

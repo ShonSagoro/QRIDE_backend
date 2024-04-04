@@ -3,7 +3,7 @@ import { Valoration } from "../../domain/entities/Valoration";
 import { ValorationInterface } from "../../domain/ports/ValorationInterface";
 import { BaseResponse } from "../dtos/response/BaseResponse";
 
-export class GetByUUIDValorationCase{
+export class GetByUUIDValorationUseCase{
     constructor(readonly valorationInterface: ValorationInterface) {
         
     }

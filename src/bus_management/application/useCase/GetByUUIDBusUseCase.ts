@@ -3,7 +3,7 @@ import { BusInterface } from "../../domain/ports/BusInterface";
 import { BaseResponse } from "../dtos/response/BaseResponse";
 import { BusResponse } from "../dtos/response/BusResponse";
 
-export class GetByUUIDBusCase{
+export class GetByUUIDBusUseCase{
     constructor(readonly busInterface: BusInterface) {
         
     }

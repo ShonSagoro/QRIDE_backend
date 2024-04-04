@@ -3,7 +3,7 @@ import { RoutesBusInterface } from "../../domain/ports/RoutesBusInterface";
 import { BaseResponse } from "../dtos/response/BaseResponse";
 import { RoutesBusResponse } from "../dtos/response/RoutesBusResponse";
 
-export class ListRoutesBusCase{
+export class ListRoutesBusUseCase{
     constructor(readonly routesBusInterface: RoutesBusInterface) {
         
     }

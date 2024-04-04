@@ -1,16 +1,13 @@
-import { CreateBusRequest } from '../../application/dtos/request/CreateBusRequest';
+import { ListValorationUseCase } from "../../application/useCase/ListValorationUseCase";
 import { BaseResponse } from '../../application/dtos/response/BaseResponse';
 import { Request, Response } from 'express';
-import { CreateBusUseCase } from '../../application/useCase/CreateBusUseCase';
 
-export class CreateBusController{
-    constructor(readonly useCase: CreateBusUseCase){}
+export class ListValorationController{
+    constructor(readonly useCase: ListValorationUseCase){}
 
     async execute(req: Request, res: Response){
-        const data = req.body;
-        const request = new CreateBusRequest(data.driver, data.schedule, parseInt(data.boardingPrice));
         try{
-            const baseResponse = await this.useCase.execute(request);
+            const baseResponse = await this.useCase.execute();
             res.status(baseResponse.statusCode).json(baseResponse);
         }catch(error){
             let baseResponse = new BaseResponse("Error", "Internal server error", false, 500);

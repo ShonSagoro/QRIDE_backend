@@ -4,7 +4,7 @@ import { CreateBusRequest } from "../dtos/request/CreateBusRequest";
 import { BaseResponse } from "../dtos/response/BaseResponse";
 import { BusResponse } from "../dtos/response/BusResponse";
 
-export class CreateBusCase{
+export class CreateBusUseCase{
     constructor(readonly busInterface: BusInterface) {
         
     }

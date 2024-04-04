@@ -1,7 +1,7 @@
 import { ValorationInterface } from "../../domain/ports/ValorationInterface";
 import { BaseResponse } from "../dtos/response/BaseResponse";
 
-export class DeleteValorationCase {
+export class DeleteValorationUseCase {
     constructor(readonly valorationInterface: ValorationInterface) {
         
     }
