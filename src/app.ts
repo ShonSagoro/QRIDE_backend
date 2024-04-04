@@ -14,7 +14,6 @@ const app = express();
 
 const HOST:string = process.env.HOST_SERVER || 'localhost';
 const PORT:number  = Number(process.env.PORT_SERVER) || 8080;
-const BASE_URL = process.env.BASE_URL || "/api/v1/";
 
 app.use(express.static(path.join(__dirname, './public/images')));
 app.use(express.json()); 

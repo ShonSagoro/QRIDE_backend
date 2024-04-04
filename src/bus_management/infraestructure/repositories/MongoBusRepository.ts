@@ -42,14 +42,21 @@ export class MongoBusRepository implements BusInterface{
     }
     async list(): Promise<Bus[] | null> {
         try{
-            const result = await this.collection.find();
+            const result = await this.collection.find().toArray();
             if(result){
+                let buses: Bus[] = result.map((element: any) => {
+                    let bus = new Bus(element.driver, element.schedule, parseInt(element.boardingPrice));
+                    bus.uuid = element.uuid;
+                    return bus;
+                });
+                console.log(buses);
                 return result.map((element: any) => {
                     let bus = new Bus(element.driver, element.schedule, parseInt(element.boardingPrice));
                     bus.uuid = element.uuid;
                     return bus;
                 });
             }
+            
             return Promise.resolve(null);
         }catch(error){
             return Promise.resolve(null);

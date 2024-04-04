@@ -21,6 +21,8 @@ export class MongoValorationsRespository implements ValorationInterface{
         try{
             let valoration_exist = await this.findByUUID(uuid);
             if(valoration_exist){
+                valoration.uuidBus = valoration_exist.uuidBus;
+                valoration.uuidUser = valoration_exist.uuidUser;
                 this.collection.updateOne({uuid: uuid}, {$set: valoration});
                 return Promise.resolve(valoration);
             }else{
@@ -41,10 +43,10 @@ export class MongoValorationsRespository implements ValorationInterface{
 
     async list(): Promise<Valoration[] | null> {
         try{
-            const result = await this.collection.find();
+            const result = await this.collection.find().toArray();
             if(result){
-                return result.map((element: any) => {
-                    let valoration = new Valoration(parseInt(element.raiting), element.comment ,element.user_uuid, element.bus_uuid);
+                return  result.map((element: any) => {
+                    let valoration = new Valoration(parseInt(element.raiting), element.comment ,element.uuidUser, element.uuidBus);
                     valoration.uuid = element.uuid;
                     return valoration;
                 });
@@ -58,7 +60,8 @@ export class MongoValorationsRespository implements ValorationInterface{
         try{
             const result = await this.collection.findOne({uuid});
             if(result){
-                return new Valoration(parseInt(result.raiting), result.comment, result.user_uuid, result.bus_uuid);
+                console.log(result);
+                return new Valoration(parseInt(result.raiting), result.comment, result.uuidUser, result.uuidBus);
             }
             return Promise.resolve(null);
         }catch(error){
@@ -68,10 +71,10 @@ export class MongoValorationsRespository implements ValorationInterface{
 
     async findByUserUUID(user_uuid: string): Promise<Valoration[] | null> {
         try{
-            const result = await this.collection.find({"uuidUser": user_uuid});
+            const result = await this.collection.find({"uuidUser": user_uuid}).toArray();
             if(result){
                 return result.map((element: any) => {
-                    let valoration = new Valoration(parseInt(element.raiting), element.comment ,element.user_uuid, element.bus_uuid);
+                    let valoration = new Valoration(parseInt(element.raiting), element.comment ,element.uuidUser, element.uuidBus);
                     valoration.uuid = element.uuid;
                     return valoration;
                 });
@@ -84,10 +87,11 @@ export class MongoValorationsRespository implements ValorationInterface{
 
     async findByBusUUID(bus_uuid: string): Promise<Valoration[] | null> {
         try{
-            const result = await this.collection.find({"uuidBus": bus_uuid});
+            const result = await this.collection.find({"uuidBus": bus_uuid}).toArray();
+            console.log(result);
             if(result){
                 return result.map((element: any) => {
-                    let valoration = new Valoration(parseInt(element.raiting), element.comment ,element.user_uuid, element.bus_uuid);
+                    let valoration = new Valoration(parseInt(element.raiting), element.comment ,element.uuidUser, element.uuidBus);
                     valoration.uuid = element.uuid;
                     return valoration;
                 });

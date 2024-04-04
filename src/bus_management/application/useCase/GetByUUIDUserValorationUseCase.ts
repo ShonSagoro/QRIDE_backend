@@ -8,12 +8,13 @@ export class GetByUUIDUserValorationUseCase{
         
     }
     async execute(uuidUser: string): Promise<BaseResponse> {
-        let valorationsResult= await this.valorationInterface.findByUserUUID(uuidUser);
-        if (valorationsResult && valorationsResult.length > 0) {
-            let valorationResponses = valorationsResult.map((valoration: Valoration) => {
-                new ValorationResponse(valoration.uuid ,valoration.raiting, valoration.comment, valoration.uuidUser, valoration.uuidBus);
+        let valorations= await this.valorationInterface.findByUserUUID(uuidUser);
+        console.log(valorations);
+        if (valorations && valorations.length > 0) {
+            let valorationsResponse = valorations.map((valoration: Valoration) => {
+                return new ValorationResponse(valoration.uuid ,valoration.raiting, valoration.comment, valoration.uuidUser, valoration.uuidBus);
             });
-            return new BaseResponse(valorationResponses, "Valorations successfully found", true, 200);
+            return new BaseResponse(valorationsResponse, "Valorations successfully found", true, 200);
         }else{
             return new BaseResponse(null, "Valorations not found", false, 404);
         }

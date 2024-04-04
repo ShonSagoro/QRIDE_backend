@@ -45,7 +45,7 @@ export class MongoRoutesBusRepository implements RoutesBusInterface{
 
     async list(): Promise<RoutesBus[] | null> {
         try{
-            const result = await this.collection.find();
+            const result = await this.collection.find().toArray();
             if(result){
                 return result.map((element: any) => {
                     let origin = new Coordinate(element.origin.latitude, element.origin.longitude);

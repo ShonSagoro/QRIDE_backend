@@ -8,9 +8,9 @@ export class GetByUUIDBusValorationUseCase{
         
     }
     async execute(uuidBus: string): Promise<BaseResponse> {
-        let valorationsResult= await this.valorationInterface.findByBusUUID(uuidBus);
-        if (valorationsResult && valorationsResult.length > 0) {
-            let valorationsResponse = valorationsResult.map((valoration: Valoration) => {
+        let valorations= await this.valorationInterface.findByBusUUID(uuidBus);
+        if (valorations && valorations.length > 0) {
+            let valorationsResponse = valorations.map((valoration: Valoration) => {
                 return new ValorationResponse(valoration.uuid ,valoration.raiting, valoration.comment, valoration.uuidUser, valoration.uuidBus);
             });
             return new BaseResponse(valorationsResponse, "Valorations successfully found", true, 200);
