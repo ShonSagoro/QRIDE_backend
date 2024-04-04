@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { setupUserRoutes } from './user_management/infraestructure/routes/UserRoutes';
 import { setupUserHistoryRoutes } from './user_management/infraestructure/routes/UserHistoryRoutes';
+import { setupBusRoutes } from './bus_management/infraestructure/routes/BusRoutes';
+import { setupRoutesBusRoutes } from './bus_management/infraestructure/routes/RoutesBusRoutes';
+import { setupValorationRoutes } from './bus_management/infraestructure/routes/ValorationRoutes';
 dotenv.config();
 
 const app = express();
@@ -17,6 +20,9 @@ app.use(express.static(path.join(__dirname, './public/images')));
 app.use(express.json()); 
 setupUserRoutes(app);
 setupUserHistoryRoutes(app);
+setupBusRoutes(app);
+setupRoutesBusRoutes(app);
+setupValorationRoutes(app);
 app.use(morgan('dev'))
 
 app.listen(PORT, HOST, () => {

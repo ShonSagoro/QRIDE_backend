@@ -13,10 +13,4 @@ export class CreateRoutesBusRequest {
         this.uuidBus = uuidBus;
     }
 
-
-    private setOrigin(origin: Coordinate): void { this.origin = origin; }
-   
-    private setDestination(destination: Coordinate): void { this.destination = destination; }
-
-
 }

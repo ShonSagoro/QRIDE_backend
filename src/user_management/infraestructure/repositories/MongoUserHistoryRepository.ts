@@ -59,8 +59,6 @@ export class MongoUserHistoryRepository implements UserHistoryInterface{
         }
     }
     async update(uuid: string, user_history: UserHistory): Promise<UserHistory | null> {
-        console.log(uuid);
-        console.log(user_history);
         try {
             let userUpdate = await this.findByUUID(uuid); 
             console.log(userUpdate);
@@ -86,7 +84,7 @@ export class MongoUserHistoryRepository implements UserHistoryInterface{
     }
 
     private async initializeCollection(): Promise<void> {
-        this.collection = await connect("user_history");
+        this.collection = await connect("user_histories");
     }
 
 }
