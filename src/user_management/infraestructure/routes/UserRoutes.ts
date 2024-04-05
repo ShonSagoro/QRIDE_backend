@@ -9,6 +9,9 @@ const MODEL_URL = "users/";
 const BASE_URL = process.env.BASE_URL || "/api/v1/";
 
 export function setupUserRoutes(app: Express) {
+    app.get(`${BASE_URL}${MODEL_URL}health`, (req, res) => {
+        res.status(200).json({ status: 'OK' });
+    });
     app.post(`${BASE_URL}${MODEL_URL}sing_up`, singUpUserController.execute.bind(singUpUserController));
     app.post(`${BASE_URL}${MODEL_URL}sing_in`, singInUserController.execute.bind(singInUserController));
     app.get(`${BASE_URL}${MODEL_URL}:uuid`, Verifytoken, getByUuidController.execute.bind(getByUuidController));

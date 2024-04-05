@@ -12,9 +12,6 @@ class JWTMiddleware {
     public static async VerifyToken(req: Request, res: Response, next: NextFunction) {
         const headers = req.headers as IncomingHttpHeaders;
         const authHeader = headers['authorization'];
-        console.log(authHeader);
-        console.log(JWTMiddleware.blacklist);
-        console.log(JWTMiddleware.JWT_SECRET);
 
         if (!authHeader) {
             return res.status(401).json({ message: 'Token not provided' });
@@ -27,7 +24,6 @@ class JWTMiddleware {
         }
 
         if (await JWTMiddleware.isTokenRevoked(token)) {
-            console.log('Token is revoked');
             return res.status(401).json({ message: 'Token is revoked' });
         }
 
@@ -44,8 +40,6 @@ class JWTMiddleware {
     }
 
     public static async GenerateToken(data: any): Promise<string> {
-        console.log(JWTMiddleware.JWT_SECRET);
-
         if (!JWTMiddleware.JWT_SECRET) {
             throw new Error('JWT secret not configured');
         }

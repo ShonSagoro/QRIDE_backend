@@ -18,7 +18,6 @@ export class SingOutUserController {
             return res.status(401).json({ message: 'Token not provided' });
         }
         const token = authHeader.split(' ')[1];
-        console.log(token); 
         try {
             JWTMiddleware.addToBlacklist(token);
             this.singOutUserCase.execute(uuid);
