@@ -5,4 +5,5 @@ export interface RoutesBusInterface {
     delete(uuid: string): Promise<void>;
     list(): Promise<RoutesBus[] | null>;
     findByUUID(uuid: string): Promise<RoutesBus | null>;
+    
 }

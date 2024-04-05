@@ -6,6 +6,7 @@ export class RoutesBus {
     public origin: Coordinate;
     public destination: Coordinate;
     public region: string;
+    public busStops: Coordinate[];
     public uuidBus: string;
 
     constructor( origin: Coordinate, destination: Coordinate, region: string, uuidBus: string) {
@@ -14,6 +15,11 @@ export class RoutesBus {
         this.destination = destination;
         this.region = region;
         this.uuidBus = uuidBus;
+        this.busStops = [];
+    }
+
+    public addBusStop(busStop: Coordinate): void {
+        this.busStops.push(busStop);
     }
     
 }

@@ -35,6 +35,19 @@ import { GetByUUIDUserValorationController } from './controllers/GetByUUIDUserVa
 import { ListValorationController } from './controllers/ListValorationController';
 import { GetByUUIDValorationController } from './controllers/GetByUUIDValorationController';
 import { UpdateValorationController } from './controllers/UpdateValorationController';
+import { MongoStopRouteRepository } from './repositories/MongoStopRoutesjRepository';
+import { CreateStopBusUseCase } from '../application/useCase/CreateStopBusUseCase';
+import { DeleteStopBusUseCase } from '../application/useCase/DeleteStopBusUseCase';
+import { GetByAproximationStopBusUseCase } from '../application/useCase/GetByAproximationStopBusUseCase';
+import { GetByRouteUUIDStopBusUseCase } from '../application/useCase/GetByRouteUUIDStopBusUseCase';
+import { GetByUUIDStopBusUseCase } from '../application/useCase/GetByUUIDStopBusUseCase';
+import { UpdateStopBusUseCase } from '../application/useCase/UpdateStopBusUseCase';
+import { CreateStopBusController } from './controllers/CreateStopBusController';
+import { DeleteStopBusController } from './controllers/DeleteStopBusController';
+import { GetByAproximationStopBusController } from './controllers/GetByAproximationStopBusController';
+import { GetByRouteUUIDStopBusController } from './controllers/GetByRouteUUIDStopBusController';
+import { GetByUUIDStopBusController } from './controllers/GetByUUIDStopBusController';
+import { UpdateStopBusController } from './controllers/UpdateStopBusController';
 
 
 // Bus
@@ -84,3 +97,20 @@ export const getByUUIDUserValorationController = new GetByUUIDUserValorationCont
 export const getByUUIDValorationController = new GetByUUIDValorationController(getByUUIDValorationUseCase);
 export const listValorationController = new ListValorationController(listValorationUseCase);
 export const updateValorationController = new UpdateValorationController(updateValorationUseCase);
+
+// Stops 
+export const databaseStopRouteRepository = new MongoStopRouteRepository();
+
+export const createStopRouteUseCase = new CreateStopBusUseCase(databaseStopRouteRepository);
+export const deleteStopBusUseCase = new DeleteStopBusUseCase(databaseStopRouteRepository);
+export const getByAproximationStopBusUseCase = new GetByAproximationStopBusUseCase(databaseStopRouteRepository);
+export const getByRouteUUIDStopBusUseCase = new GetByRouteUUIDStopBusUseCase(databaseStopRouteRepository);
+export const getByUUIDStopBusUseCase = new GetByUUIDStopBusUseCase(databaseStopRouteRepository);
+export const updateStopBusUseCase = new UpdateStopBusUseCase(databaseStopRouteRepository);
+
+export const createStopBusController = new CreateStopBusController(createStopRouteUseCase);
+export const deleteStopBusController = new DeleteStopBusController(deleteStopBusUseCase);
+export const getByAproximationStopBusController = new GetByAproximationStopBusController(getByAproximationStopBusUseCase);
+export const getByRouteUUIDStopBusController = new GetByRouteUUIDStopBusController(getByRouteUUIDStopBusUseCase);
+export const getByUUIDStopBusController = new GetByUUIDStopBusController(getByUUIDStopBusUseCase);
+export const updateStopBusController = new UpdateStopBusController(updateStopBusUseCase);
