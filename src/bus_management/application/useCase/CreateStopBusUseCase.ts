@@ -11,6 +11,14 @@ export class CreateStopBusUseCase {
     }
     
     async execute(request: CreateStopRouteRequest): Promise<BaseResponse> {
+        let invalidCoordinates = request.routes.some(route => 
+            route.latitude < -90 || route.latitude > 90 || route.longitude < -180 || route.longitude > 180
+        );
+        
+        if (invalidCoordinates) {
+            return new BaseResponse(null, "Invalid coordinates, must be 90 to -90 in latitude and 180 to -180 en longitude", false, 400);
+        }
+        
         let stopRoutes = request.routes.map((route) => new StopRoute(new Coordinate(route.latitude, route.longitude), request.uuidRoute));
         if (stopRoutes.length === 0) {
             return new BaseResponse(null, "No se han proporcionado rutas", false, 400);

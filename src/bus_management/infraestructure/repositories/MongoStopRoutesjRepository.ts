@@ -32,15 +32,8 @@ export class MongoStopRouteRepository implements StopRouteInterface{
     async findByAproximation(coordinate: Coordinate): Promise<StopRoute[] | null> {
         try{
             const result = await this.collection.find({
-                point: {
-                    $near: {
-                        $geometry: {
-                            type: "Point",
-                            coordinates: [coordinate.latitude, coordinate.longitude]
-                        },
-                        $maxDistance: 1000
-                    }
-                }
+                "point.latitude": coordinate.latitude,
+                "point.longitude": coordinate.longitude
             }).toArray();
             if(result){
                 return result.map((element: any) => {
@@ -52,6 +45,7 @@ export class MongoStopRouteRepository implements StopRouteInterface{
             }
             return Promise.resolve(null);
         }catch(error){
+            console.log(error);
             return Promise.resolve(null);
         }
     }

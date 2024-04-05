@@ -9,7 +9,7 @@ export class CreateRoutesBusController{
 
     async execute(req: Request, res: Response){
         const data = req.body;
-        const request = new CreateRoutesBusRequest(data.origin, data.destination, data.region, data.uuidBus);
+        const request = new CreateRoutesBusRequest(parseInt(data.number),data.origin, data.destination, data.region, data.uuidBus);
         try {
             const BaseResponse = await this.useCase.execute(request);
             res.status(BaseResponse.statusCode).json(BaseResponse);

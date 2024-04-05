@@ -9,6 +9,9 @@ export class UpdateStopBusUseCase{
 
     }
     async execute(uuid:string, resquest: UpdateStopRouteRequest): Promise<BaseResponse>{
+        if (resquest.route.latitude < -90 || resquest.route.latitude > 90 || resquest.route.longitude < -180 || resquest.route.longitude > 180) {
+            return new BaseResponse(null, "Invalid coordinates, must be 90 to -90 in latitude and 180 to -180 en longitude", false, 400);
+        }
         let stopRoute = new StopRoute(resquest.route, resquest.uuidRoute);
         let result = await this.stopRouteInterface.update(uuid, stopRoute);
         if (result) {

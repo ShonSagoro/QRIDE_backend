@@ -8,9 +8,11 @@ export class RoutesBus {
     public region: string;
     public busStops: Coordinate[];
     public uuidBus: string;
+    public number: number;
 
-    constructor( origin: Coordinate, destination: Coordinate, region: string, uuidBus: string) {
+    constructor( number:number, origin: Coordinate, destination: Coordinate, region: string, uuidBus: string) {
         this.uuid = uuidv4();
+        this.number = number;
         this.origin = origin;
         this.destination = destination;
         this.region = region;

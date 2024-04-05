@@ -9,7 +9,7 @@ export class GetByAproximationStopBusController{
 
     async execute(req: Request, res: Response){
         const data = req.body;
-        const request = new SearchAproximationRequest(new Coordinate(data.latitude, data.longitude));
+        const request = new SearchAproximationRequest(new Coordinate(parseInt(data.latitude), parseInt(data.longitude)));
         try {
             const baseResponse = await this.useCase.execute(request);
             res.status(baseResponse.statusCode).json(baseResponse);

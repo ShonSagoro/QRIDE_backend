@@ -2,6 +2,7 @@ import { UpdateStopRouteRequest } from "../../application/dtos/request/UpdateSto
 import { BaseResponse } from "../../application/dtos/response/BaseResponse";
 import { UpdateStopBusUseCase } from "../../application/useCase/UpdateStopBusUseCase";
 import { Request, Response } from 'express';
+import { Coordinate } from "../../domain/entities/Coordinate";
 
 export class UpdateStopBusController{
     constructor(readonly useCase: UpdateStopBusUseCase) {}
@@ -9,7 +10,7 @@ export class UpdateStopBusController{
     async execute(req: Request, res: Response){
         const uuid = req.params.uuid;
         const data = req.body;
-        let request = new UpdateStopRouteRequest(data.uuidRoute, data.route);
+        let request = new UpdateStopRouteRequest(data.uuidRoute, new Coordinate(parseInt(data.route.latitude), parseInt(data.route.longitude)));
         try {
             const BaseResponse = await this.useCase.execute(uuid, request);
             res.status(BaseResponse.statusCode).json(BaseResponse);

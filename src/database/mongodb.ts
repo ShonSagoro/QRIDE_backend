@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { MongoClient, MongoClientOptions, Collection} from "mongodb";
+import { MongoClient, MongoClientOptions, Collection } from "mongodb";
 import { Signale } from "signale";
 
 dotenv.config();
@@ -15,11 +15,13 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 let collection: Collection;
 
-export async function connect(collectionName: string): Promise<Collection|null>{
+export async function connect(collectionName: string): Promise<Collection | null> {
     try {
         await client.connect();
         signale.success('Conexion a la base de datos exitosa');
-        return client.db().collection(collectionName);
+        const db = client.db();
+        collection = db.collection(collectionName);
+        return collection;
     } catch (error) {
         signale.error(error);
         return null;

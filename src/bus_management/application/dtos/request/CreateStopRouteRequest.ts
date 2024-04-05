@@ -6,7 +6,7 @@ export class CreateStopRouteRequest {
 
     constructor(uuidRoute: string, routes: any[]) {
         this.uuidRoute = uuidRoute;
-        this.routes = routes.map((route) => new Coordinate(route.latitude, route.longitude));
+        this.routes = routes.map((route) => new Coordinate(parseInt(route.latitude), parseInt(route.longitude)));
     }
 
 }
