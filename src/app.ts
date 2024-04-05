@@ -7,6 +7,7 @@ import { setupUserHistoryRoutes } from './user_management/infraestructure/routes
 import { setupBusRoutes } from './bus_management/infraestructure/routes/BusRoutes';
 import { setupRoutesBusRoutes } from './bus_management/infraestructure/routes/RoutesBusRoutes';
 import { setupValorationRoutes } from './bus_management/infraestructure/routes/ValorationRoutes';
+import { setupStopsRoutes } from './bus_management/infraestructure/routes/StopsRoutes';
 dotenv.config();
 
 const app = express();
@@ -22,6 +23,7 @@ setupUserHistoryRoutes(app);
 setupBusRoutes(app);
 setupRoutesBusRoutes(app);
 setupValorationRoutes(app);
+setupStopsRoutes(app);
 app.use(morgan('dev'))
 
 let server = app.listen(PORT, HOST, () => {

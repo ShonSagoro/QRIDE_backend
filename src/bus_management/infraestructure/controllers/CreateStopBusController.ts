@@ -8,7 +8,7 @@ export class CreateStopBusController{
 
     async execute(req: Request, res: Response){
         const data = req.body;
-        const request = new CreateStopRouteRequest(data.route, data.uuidRoute);
+        const request = new CreateStopRouteRequest(data.uuidRoute, data.routes);
         try {
             const BaseResponse = await this.useCase.execute(request);
             res.status(BaseResponse.statusCode).json(BaseResponse);
