@@ -49,7 +49,6 @@ export class MongoBusRepository implements BusInterface{
                     bus.uuid = element.uuid;
                     return bus;
                 });
-                console.log(buses);
                 return result.map((element: any) => {
                     let bus = new Bus(element.driver, element.schedule, parseInt(element.boardingPrice));
                     bus.uuid = element.uuid;

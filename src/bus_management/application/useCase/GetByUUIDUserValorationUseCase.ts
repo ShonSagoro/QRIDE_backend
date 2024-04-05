@@ -9,7 +9,6 @@ export class GetByUUIDUserValorationUseCase{
     }
     async execute(uuidUser: string): Promise<BaseResponse> {
         let valorations= await this.valorationInterface.findByUserUUID(uuidUser);
-        console.log(valorations);
         if (valorations && valorations.length > 0) {
             let valorationsResponse = valorations.map((valoration: Valoration) => {
                 return new ValorationResponse(valoration.uuid ,valoration.raiting, valoration.comment, valoration.uuidUser, valoration.uuidBus);

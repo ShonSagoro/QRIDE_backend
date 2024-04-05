@@ -23,7 +23,7 @@ export class MongoDBUserRepository implements UserInterface {
             const result = await this.collection.findOne({ uuid });
             if (result) {
                 let status = new Status(result.token, result.verifiedAt);
-                let contact = new Contact(result.contact.name, result.contact.lastName, result.contact.phoneNumber);
+                let contact = new Contact(result.contact.name, result.contact.lastname, result.contact.phoneNumber);
                 let credentials = new Credentials(result.credentials.email, "");
               
                 let user = new User(status, contact, credentials);
@@ -37,7 +37,6 @@ export class MongoDBUserRepository implements UserInterface {
     }
 
     async sing_out(uuid: string): Promise<void> {
-        console.log("DESLOGEAO")
         try{
             const result = await this.collection.findOne({ uuid });
             if (result) {
@@ -54,10 +53,9 @@ export class MongoDBUserRepository implements UserInterface {
     async sing_in(email: string, password: string, encryptionService: EncryptService, tokenServices: TokenServices): Promise<User | null> {
         try {
             const result = await this.collection.findOne({ 'credentials.email': email });
-            console.log(result);
             if (result) {
                 let status = new Status(result.token, result.verifiedAt);
-                let contact = new Contact(result.contact.name, result.contact.lastName, result.contact.phoneNumber);
+                let contact = new Contact(result.contact.name, result.contact.lastname, result.contact.phoneNumber);
                 let credentials = new Credentials(result.credentials.email, result.credentials.password);
                 const user = new User(status, contact, credentials);
                 user.uuid=result.uuid;
@@ -91,12 +89,9 @@ export class MongoDBUserRepository implements UserInterface {
     async findByEmail(email: string): Promise<User | null> {
         try {
             const result = await this.collection.findOne({ 'credentials.email': email });
-            console.log(result);
-            console.log(email);
-            console.log("ENCONTRADO");
             if (result) {
                 let status = new Status(result.token, result.verifiedAt);
-                let contact = new Contact(result.contact.name, result.contact.lastName, result.contact.phoneNumber);
+                let contact = new Contact(result.contact.name, result.contact.lastname, result.contact.phoneNumber);
                 let credentials = new Credentials(result.credentials.email, "");
               
                 let user = new User(status, contact, credentials);
@@ -127,6 +122,7 @@ export class MongoDBUserRepository implements UserInterface {
     }
 
     async delete(uuid:string): Promise<void> {
+
         try {
             await this.collection.deleteOne({ uuid });
         } catch (error) {
@@ -135,14 +131,10 @@ export class MongoDBUserRepository implements UserInterface {
     }
 
     async update(uuid:string, user: User): Promise<User | null> {
-        console.log("actualizo");
         try {
-            console.log(user);
             if (user.credentials.email){
-                console.log(user.credentials.email);
                 let user_exist = await this.findByEmail(user.credentials.email);
                 if (user_exist){
-                    console.log("EXISTE");
                     return null;
                 }
             }
@@ -159,7 +151,6 @@ export class MongoDBUserRepository implements UserInterface {
             };
 
             await this.collection.updateOne({ uuid: uuid }, { $set: updatedUser });
-            console.log("ACTUALIZADO");
             return user;
         } catch (error) {
             return null;
@@ -170,9 +161,9 @@ export class MongoDBUserRepository implements UserInterface {
         try {
             const result = await this.collection.find().toArray();
 
-            return result.map((user: { token: string; verifiedAt: Date; contact: { name: string; lastName: string; phoneNumber: string; }; credentials: { email: string; password: string; }; uuid: string; }) => {
+            return result.map((user: { token: string; verifiedAt: Date; contact: { name: string; lastname: string; phoneNumber: string; }; credentials: { email: string; password: string; }; uuid: string; }) => {
                 let status = new Status(user.token, user.verifiedAt);
-                let contact = new Contact(user.contact.name, user.contact.lastName, user.contact.phoneNumber);
+                let contact = new Contact(user.contact.name, user.contact.lastname, user.contact.phoneNumber);
                 let credentials = new Credentials(user.credentials.email, "");
                 
                 let newUser = new User(status, contact, credentials);

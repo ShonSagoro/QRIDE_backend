@@ -23,11 +23,9 @@ export class MysqlUserRepository implements UserInterface {
                 user.uuid = result[0].uuid;
                 return user;
             }else{
-                console.log("No user found");
                 return null;
             }
         } catch (error) {
-            console.log(error);
             return null;
         }
     }
@@ -36,16 +34,13 @@ export class MysqlUserRepository implements UserInterface {
         const params: any[] = [uuid];
         try {
             const [result]: any = await query(sql, params);
-            console.log(result);
             let status = new Status("", result[0].verified_at);
             let contact = new Contact(result[0].name, result[0].lastname, result[0].number_phone);
             let credentials = new Credentials(result[0].email, result[0].password);
             let user = new User(status, contact, credentials);
             user.uuid = result[0].uuid;
-            console.log(user);
             return user;
         } catch (error) {
-            console.log(error);
             return null;
         }
     }
@@ -101,11 +96,7 @@ export class MysqlUserRepository implements UserInterface {
 
     async sing_up(user: User): Promise<User | null> {
         const existingUser = await this.findByEmail(user.credentials.email);
-
-        console.log("User");
-        console.log(user);
         if (existingUser) {
-            console.log("User no funciona");
             throw new Error("The user exists with the same email.");
         }
         let sql = `INSERT INTO users (uuid, name, lastname, number_phone, email, password, verified_at, token) VALUES (?, ?, ?, ?, ?, ?, '', '')`;
@@ -121,7 +112,6 @@ export class MysqlUserRepository implements UserInterface {
         let sql = `SELECT * FROM users WHERE email = ?`;
         try {
             const [result]: any = await query(sql, [email]);
-            console.log(result);
             if (result.length > 0) {
                 let status = new Status(result[0].token, result[0].verified_at);
                 let contact = new Contact(result[0].name, result[0].lastname, result[0].number_phone);

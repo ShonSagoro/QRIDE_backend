@@ -60,7 +60,6 @@ export class MongoValorationsRespository implements ValorationInterface{
         try{
             const result = await this.collection.findOne({uuid});
             if(result){
-                console.log(result);
                 return new Valoration(parseInt(result.raiting), result.comment, result.uuidUser, result.uuidBus);
             }
             return Promise.resolve(null);
@@ -88,7 +87,6 @@ export class MongoValorationsRespository implements ValorationInterface{
     async findByBusUUID(bus_uuid: string): Promise<Valoration[] | null> {
         try{
             const result = await this.collection.find({"uuidBus": bus_uuid}).toArray();
-            console.log(result);
             if(result){
                 return result.map((element: any) => {
                     let valoration = new Valoration(parseInt(element.raiting), element.comment ,element.uuidUser, element.uuidBus);

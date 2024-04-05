@@ -33,7 +33,6 @@ export class MongoUserHistoryRepository implements UserHistoryInterface{
     async findByUUID(uuid: string): Promise<UserHistory | null> {
         try {
             const result = await this.collection.findOne({ uuid });
-            console.log(result);
             if (result) {
                 return result;  
             }
@@ -61,7 +60,6 @@ export class MongoUserHistoryRepository implements UserHistoryInterface{
     async update(uuid: string, user_history: UserHistory): Promise<UserHistory | null> {
         try {
             let userUpdate = await this.findByUUID(uuid); 
-            console.log(userUpdate);
             if (!userUpdate) {
                 return Promise.resolve(null);
             }else{

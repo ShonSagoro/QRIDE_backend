@@ -28,13 +28,13 @@ export class UpdateUserController {
             res.status(400).send(baseResponse);
             return;
         }
-        if (data.email.length > 250 || data.name.length > 100 || data.lastName.length > 100) {
+        if (data.email.length > 250 || data.name.length > 100 || data.lastname.length > 100) {
             const baseResponse = new BaseResponse(null, "Input fields are too long", false);
             return res.status(400).json(baseResponse);
         }
 
         const { uuid } = req.params;
-        const userUpdateRequest = new UpdateUserRequest(data.email, data.password, data.name, data.lastName, data.phoneNumber);
+        const userUpdateRequest = new UpdateUserRequest(data.email, data.password, data.name, data.lastname, data.phoneNumber);
         try {
             const user = await this.updateUserCase.execute(
                 uuid, userUpdateRequest

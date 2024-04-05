@@ -9,7 +9,6 @@ export class CreateValorationController {
     async execute(req: Request, res: Response) {
         const data = req.body;
         const request = new CreateValorationRequest(parseInt(data.raiting), data.comment, data.uuidUser, data.uuidBus);
-        console.log(request);
         try {
             const baseResponse = await this.useCase.execute(request);
             res.status(baseResponse.statusCode).json(baseResponse);

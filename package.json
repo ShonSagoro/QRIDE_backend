@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsnd --respawn src/app.ts",
     "build": "tsc",
-    "test": "jest",
+    "test": "jest  --maxWorkers=1 --forceExit",
     "test_email": "ts-node src/user/infraestructure/services/NodemailerEmailService.ts"
   },
   "keywords": [],

@@ -33,6 +33,5 @@ export class NodemailerEmailService {
         }
 
         let info = await this.transporter.sendMail(message);
-        console.log(info);
     }
 }

@@ -24,8 +24,9 @@ setupRoutesBusRoutes(app);
 setupValorationRoutes(app);
 app.use(morgan('dev'))
 
-app.listen(PORT, HOST, () => {
+let server = app.listen(PORT, HOST, () => {
     console.log(`Server is running on host ${HOST} and port ${PORT}`);
 });
 
-export { app };
+
+export { app, server };

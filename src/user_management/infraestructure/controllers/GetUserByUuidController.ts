@@ -10,7 +10,6 @@ export default class GetUserByUuidController {
         const { uuid } = req.params;
         try {
             const user = await this.getByUserCase.executeByUUID(uuid);
-            console.log(user);
             if (user) {
                 const userResponse = new UserResponse(user);
                 const baseResponse = new BaseResponse(userResponse, "User successfully found", true);

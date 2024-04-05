@@ -10,7 +10,6 @@ const MONGO_PASS = process.env.MONGO_PASS;
 const MONGO_HOST = process.env.MONGO_HOST;
 
 const uri = `mongodb://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}/`;
-console.log(uri);
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true } as MongoClientOptions);
 
