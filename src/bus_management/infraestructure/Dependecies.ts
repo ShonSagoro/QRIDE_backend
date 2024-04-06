@@ -1,3 +1,4 @@
+import { GetByAproximationRoutesUseCase } from './../application/useCase/GetByAproximationRoutesUseCase';
 import { UpdateBusController } from './controllers/UpdateBusController';
 import { CreateBusController } from './controllers/CreateBusController';
 import { ListValorationUseCase } from './../application/useCase/ListValorationUseCase';
@@ -48,6 +49,7 @@ import { GetByAproximationStopBusController } from './controllers/GetByAproximat
 import { GetByRouteUUIDStopBusController } from './controllers/GetByRouteUUIDStopBusController';
 import { GetByUUIDStopBusController } from './controllers/GetByUUIDStopBusController';
 import { UpdateStopBusController } from './controllers/UpdateStopBusController';
+import { GetByAproximationRoutesController } from './controllers/GetByAproximationRoutesController';
 
 
 // Bus
@@ -73,12 +75,14 @@ export const deleteRoutesBusUseCase = new DeleteRoutesBusUseCase(databaseRoutesB
 export const getByUUIDRoutesBusUseCase = new GetByUUIDRoutesBusUseCase(databaseRoutesBusRepository);
 export const listRoutesBusUseCase = new ListRoutesBusUseCase(databaseRoutesBusRepository);
 export const updateRoutesBusUseCase = new UpdateRoutesBusUseCase(databaseRoutesBusRepository);
+export const getByAproximationRoutesUseCase = new GetByAproximationRoutesUseCase(databaseRoutesBusRepository);
 
 export const createRoutesBusController = new CreateRoutesBusController(createRoutesBusUseCase);
 export const deleteRoutesBusController = new DeleteRoutesBusController(deleteRoutesBusUseCase);
 export const getByUUIDRoutesBusController = new GetByUUIDRoutesBusController(getByUUIDRoutesBusUseCase);
 export const listRoutesBusController = new ListRoutesBusController(listRoutesBusUseCase);
 export const updateRoutesBusController = new UpdateRoutesBusController(updateRoutesBusUseCase);
+export const getByAproximationRoutesController = new GetByAproximationRoutesController(getByAproximationRoutesUseCase);
 // Valoration
 export const databaseValorationRepository = new MongoValorationsRespository();
 

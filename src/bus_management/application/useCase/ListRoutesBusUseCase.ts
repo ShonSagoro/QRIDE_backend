@@ -11,7 +11,7 @@ export class ListRoutesBusUseCase{
         let rotesBuses = await this.routesBusInterface.list();
         if (rotesBuses){
             let routesBusesResponse = rotesBuses.map((routesBus: RoutesBus) => {
-                return new RoutesBusResponse(routesBus.uuid, routesBus.origin, routesBus.destination, routesBus.region, routesBus.uuidBus);
+                return new RoutesBusResponse(routesBus.uuid, routesBus.number, routesBus.origin, routesBus.destination, routesBus.region, routesBus.uuidBus);
             });
             return new BaseResponse(routesBusesResponse, "Routes Bus successfully found", true, 200);
         }else{

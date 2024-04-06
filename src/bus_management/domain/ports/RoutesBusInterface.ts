@@ -1,3 +1,4 @@
+import { Coordinate } from '../entities/Coordinate';
 import { RoutesBus } from './../entities/RoutesBus';
 export interface RoutesBusInterface {
     create(routesBus: RoutesBus): Promise<RoutesBus | null>;
@@ -5,5 +6,6 @@ export interface RoutesBusInterface {
     delete(uuid: string): Promise<void>;
     list(): Promise<RoutesBus[] | null>;
     findByUUID(uuid: string): Promise<RoutesBus | null>;
+    findByAproximation(coordinate: Coordinate): Promise<RoutesBus[] | null>;
     
 }

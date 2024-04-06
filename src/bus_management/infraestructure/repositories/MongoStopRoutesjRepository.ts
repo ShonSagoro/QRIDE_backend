@@ -35,6 +35,7 @@ export class MongoStopRouteRepository implements StopRouteInterface{
                 "point.latitude": coordinate.latitude,
                 "point.longitude": coordinate.longitude
             }).toArray();
+            console.log(result);
             if(result){
                 return result.map((element: any) => {
                     let point = new Coordinate(element.point.latitude, element.point.longitude);
@@ -65,6 +66,7 @@ export class MongoStopRouteRepository implements StopRouteInterface{
             return Promise.resolve(null);
         }
     }
+
     async findByUUID(uuid: string): Promise<StopRoute | null> {
         try{
             const result = await this.collection.findOne({uuid});

@@ -8,6 +8,11 @@ export class CreateValorationController {
 
     async execute(req: Request, res: Response) {
         const data = req.body;
+        if (!data.raiting) {
+            let baseResponse = new BaseResponse(null, "Rating cannot be empty", false, 400);
+            res.status(baseResponse.statusCode).json(baseResponse);
+            return;
+        }
         const request = new CreateValorationRequest(parseInt(data.raiting), data.comment, data.uuidUser, data.uuidBus);
         try {
             const baseResponse = await this.useCase.execute(request);

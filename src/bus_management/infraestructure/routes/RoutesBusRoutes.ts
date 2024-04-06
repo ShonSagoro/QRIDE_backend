@@ -1,6 +1,6 @@
 import JWTMiddleware from "../../../middleware/JWTMiddleware";
 import { Express } from "express";
-import { createRoutesBusController, deleteRoutesBusController, getByUUIDRoutesBusController, listRoutesBusController, updateRoutesBusController } from "../Dependecies";
+import { createRoutesBusController, deleteRoutesBusController, getByAproximationRoutesController, getByUUIDRoutesBusController, listRoutesBusController, updateRoutesBusController } from "../Dependecies";
 
 const Verifytoken = JWTMiddleware.VerifyToken
 const MODEL_URL = "routes/";
@@ -15,4 +15,5 @@ export function setupRoutesBusRoutes(app: Express) {
     app.delete(`${BASE_URL}${MODEL_URL}:uuid`, Verifytoken, deleteRoutesBusController.execute.bind(deleteRoutesBusController));
     app.get(`${BASE_URL}${MODEL_URL}`, Verifytoken, listRoutesBusController.execute.bind(listRoutesBusController));
     app.get(`${BASE_URL}${MODEL_URL}:uuid`, Verifytoken, getByUUIDRoutesBusController.execute.bind(getByUUIDRoutesBusController));
+    app.post(`${BASE_URL}${MODEL_URL}aprox`, Verifytoken, getByAproximationRoutesController.execute.bind(getByAproximationRoutesController));
 }

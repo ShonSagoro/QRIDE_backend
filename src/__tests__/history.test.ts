@@ -16,6 +16,7 @@ describe("Mostrar Historial", () => {
                 email: 'test@gmail.com',
                 password: '12345678'
             });
+        console.log(response.body.data.message);
         expect(response.status).toBe(200);
         userUUID = response.body.data.uuid;
     });

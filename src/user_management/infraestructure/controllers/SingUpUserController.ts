@@ -13,6 +13,35 @@ export class SingUpUserController {
 
     async execute(req: Request, res: Response) {
         const data = req.body;
+        if (!data.email || !data.password){
+            const baseResponse = new BaseResponse(null, "Email and password are required", false);
+            res.status(400).send(baseResponse);
+            return;
+        }
+        const emailRegex = /\S+@\S+\.\S+/;
+        if (!emailRegex.test(data.email)) {
+            const baseResponse = new BaseResponse(null, "Invalid email format", false);
+            res.status(400).send(baseResponse);
+            return;
+        }
+
+        if (!data.name) {
+            const baseResponse = new BaseResponse(null, "Name is required", false);
+            res.status(400).send(baseResponse);
+            return;
+        }
+
+        if (data.password.length > 20) {
+            const baseResponse = new BaseResponse(null, "Password must not exceed 20 characters", false);
+            res.status(400).send(baseResponse);
+            return;
+        }
+
+        if (data.password.length < 8) {
+            const baseResponse = new BaseResponse(null, "Password must be at least 8 characters", false);
+            res.status(400).send(baseResponse);
+            return;
+        }
         data.password = await this.encryptionService.execute(data.password);
         const singUpUserRequest = new SingUpUserRequest(data.email, data.password, data.name, data.lastname, data.phoneNumber);
         try {

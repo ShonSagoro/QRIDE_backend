@@ -61,6 +61,80 @@ describe("Generar valoración", () => {
 
     });
 
+    it('Rating is required', async () => {
+        let valoration_create = '/api/v1/valorations/'
+        let data = {
+            comment: "Hello",
+            uuidUser: "ee249810-e486-4c3d-bd52-7bbe3cb01c17",
+            uuidBus: "01d0046b-bbd3-4669-8de6-a2852dcccfb4"
+        };
+        let response = await request(app)
+            .post(valoration_create)
+            .send(data)
+            .set('Authorization', `Bearer ${jwtToken}`);
+        expect(response.status).toBe(400);
+    });
+
+    it('Rating should not be negative', async () => {
+        let valoration_create = '/api/v1/valorations/'
+        let data = {
+            raiting: -1,
+            comment: "Hello",
+            uuidUser: "ee249810-e486-4c3d-bd52-7bbe3cb01c17",
+            uuidBus: "01d0046b-bbd3-4669-8de6-a2852dcccfb4"
+        };
+        let response = await request(app)
+            .post(valoration_create)
+            .send(data)
+            .set('Authorization', `Bearer ${jwtToken}`);
+        expect(response.status).toBe(400);
+    });
+
+    it('Rating should not be more than 5', async () => {
+        let valoration_create = '/api/v1/valorations/'
+        let data = {
+            raiting: 6,
+            comment: "Hello",
+            uuidUser: "ee249810-e486-4c3d-bd52-7bbe3cb01c17",
+            uuidBus: "01d0046b-bbd3-4669-8de6-a2852dcccfb4"
+        };
+        let response = await request(app)
+            .post(valoration_create)
+            .send(data)
+            .set('Authorization', `Bearer ${jwtToken}`);
+        expect(response.status).toBe(400);
+    });
+
+    it('Comment should not exceed 300 characters', async () => {
+        let valoration_create = '/api/v1/valorations/'
+        let data = {
+            raiting: 4.1,
+            comment: "A".repeat(301),
+            uuidUser: "ee249810-e486-4c3d-bd52-7bbe3cb01c17",
+            uuidBus: "01d0046b-bbd3-4669-8de6-a2852dcccfb4"
+        };
+        let response = await request(app)
+            .post(valoration_create)
+            .send(data)
+            .set('Authorization', `Bearer ${jwtToken}`);
+        expect(response.status).toBe(400);
+    });
+
+    it('Comment can contain special characters', async () => {
+        let valoration_create = '/api/v1/valorations/'
+        let data = {
+            raiting: 4.1,
+            comment: "Hello!@#$%^&*()",
+            uuidUser: "ee249810-e486-4c3d-bd52-7bbe3cb01c17",
+            uuidBus: "01d0046b-bbd3-4669-8de6-a2852dcccfb4"
+        };
+        let response = await request(app)
+            .post(valoration_create)
+            .send(data)
+            .set('Authorization', `Bearer ${jwtToken}`);
+        expect(response.status).toBe(200);
+    });
+
     afterAll(async () => {
         let response = await request(app)
             .delete(`/api/v1/users/${userUUID}`)
