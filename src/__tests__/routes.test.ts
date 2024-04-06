@@ -177,30 +177,36 @@ describe("Agregar rutas", () => {
                 email: 'test@gmail.com',
                 password: '12345678'
             });
+        userUUID = response.body.data.uuid;
+        response = await request(app)
+            .post(url_base_inicio_sesion)
+            .send({ email: 'test@gmail.com', password: '12345678' });
+        expect(response.status).toBe(200);
+        jwt_token = response.body.data.jwt_token;
     });
 
     it('Agregar rutas', async () => {
         let response = await request(app)
-        .post("/api/v1/routes/")
-        .send({
-            number: 19,
-            origin:{
-                latitude:"90",
-                longitude:"-90"
-            },
-            destination:{
-                latitude:"4",
-                longitude:"90"
-            },
-            region:"Chiapas",
-            uuidBus:"4857af8d-483e-4cd5-9ac4-ed4d547f987d"
-        })
-        .set('Authorization', `Bearer ${jwt_token}`);
+            .post("/api/v1/routes/")
+            .send({
+                number: 19,
+                origin: {
+                    latitude: "90",
+                    longitude: "-90"
+                },
+                destination: {
+                    latitude: "4",
+                    longitude: "90"
+                },
+                region: "Chiapas",
+                uuidBus: "4857af8d-483e-4cd5-9ac4-ed4d547f987d"
+            })
+            .set('Authorization', `Bearer ${jwt_token}`);
         expect(response.status).toBe(200);
         expect(response.body.success).toBe(true);
     });
 
-    
+
     afterAll(async () => {
         let response = await request(app)
             .post(url_base_inicio_sesion)
@@ -214,6 +220,6 @@ describe("Agregar rutas", () => {
     });
 });
 
-    afterAll(async () => {
-        server.close();
-    });
+afterAll(async () => {
+    server.close();
+});
