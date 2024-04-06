@@ -6,6 +6,10 @@ jest.setTimeout(30000);
 let url_base_inicio_sesion = '/api/v1/users/sing_in'
 let url_base_register = '/api/v1/users/sing_up'
 
+afterAll(async () => {
+    server.close();
+});
+
 describe('Iniciar sesión', () => {
     let userUUID: string;
 
@@ -19,8 +23,8 @@ describe('Iniciar sesión', () => {
                 email: 'test@gmail.com',
                 password: '12345678'
             });
-            console.log(response.body.message);
-            expect(response.status).toBe(200);
+        console.log(response.body.message);
+        expect(response.status).toBe(200);
         userUUID = response.body.data.uuid;
     });
 
@@ -96,7 +100,7 @@ describe('Cerrar sesión', () => {
                 email: 'test_sesion@gmail.com',
                 password: '12345678'
             });
-            console.log(response.body.message);
+        console.log(response.body.message);
 
         expect(response.status).toBe(200);
         userUUID = response.body.data.uuid;
@@ -325,6 +329,7 @@ describe('Editar perfil', () => {
 
 describe('Registrarse', () => {
     let uuidUser: string;
+    let uuidFree: string;
     it('El email no debe estar vacío.', async () => {
         const response = await request(app)
             .post(url_base_register)
@@ -376,6 +381,7 @@ describe('Registrarse', () => {
                 lastname: 'test3',
                 phoneNumber: '' // empty phone number
             });
+        uuidFree = response.body.data.uuid;
         expect(response.status).toBe(200);
         expect(response.body.success).toBe(true);
     });
@@ -450,9 +456,13 @@ describe('Registrarse', () => {
             .delete(`/api/v1/users/${uuidUser}`)
             .set('Authorization', `Bearer ${token}`);
         expect(response.status).toBe(200);
+
+        response = await request(app)
+            .delete(`/api/v1/users/${uuidFree}`)
+            .set('Authorization', `Bearer ${token}`);
+        expect(response.status).toBe(200);
+
     });
 });
 
-afterAll(async () => {
-    server.close();
-});
+

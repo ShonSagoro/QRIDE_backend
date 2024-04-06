@@ -26,7 +26,8 @@ export class MongoRoutesBusRepository implements RoutesBusInterface {
             const result = await this.stopRouteRepository.findByAproximation(coordinate);
             if (Array.isArray(result)) {
                 let uuids = [...new Set(result.map((element) => element.uuidRoute))]; console.log(uuids); if (uuids) {
-                    const result_routes = await this.collection.find({ uuid: { $in: uuids } }).toArray();
+                uuids = uuids.slice(0, 10);
+                const result_routes = await this.collection.find({ uuid: { $in: uuids } }).toArray();
                     if (result_routes) {
                         return result_routes.map((element: any) => {
                             let origin = new Coordinate(element.origin.latitude, element.origin.longitude);
