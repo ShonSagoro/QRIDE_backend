@@ -8,9 +8,10 @@
       ],
       "module": "CommonJS", // Cambiado de "esnext" a "CommonJS"
       "moduleResolution": "node",
-      "outDir": "dist",
       "strict": true,
-      "target": "es2022"
+      "target": "es2022",
+      "outDir": "./dist",
+
   },
   "include": [
       "src/**/*"
