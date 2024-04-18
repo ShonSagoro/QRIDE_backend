@@ -1,5 +1,6 @@
 import { Coordinate } from "../../../domain/entities/Coordinate";
 
+
 export class CreateUserHistoryRequest {
     public origin: Coordinate;
     public destiny: Coordinate;
